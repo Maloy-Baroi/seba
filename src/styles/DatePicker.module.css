@@ -1,0 +1,22 @@
+.datepickerContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.datepickerInput {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.clearButton {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #999;
+}

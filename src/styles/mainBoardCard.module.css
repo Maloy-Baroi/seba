@@ -1,0 +1,47 @@
+.dashWidget {
+    width: 100%;
+    height: 123px;
+    border-radius: 6px;
+    padding: 25px 20px 20px;
+    border: 1px solid #E8EBED;
+    margin: 50px 0 25px !important;
+}
+
+.dashWidgetimg span {
+    height: 48px;
+    background-color: rgba(252, 0, 1, 0.12);
+    border-radius: 50px;
+    padding: 12px;
+}
+
+.dashWidgetimg img {
+    max-width: 100%;
+    height: auto;
+}
+
+.dashWidgetcontent h5 {
+    color: #212B36;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.counters {
+    color: white;
+}
+
+.dashWidgetcontent h6 {
+    font-weight: 400;
+    font-size: 14px;
+    color: #212B36;
+}
+
+@media screen and (max-width: 767px) {
+    .dashWidgetcontent h6 {
+        font-size: 11px !important;
+    }
+
+    .dashWidgetimg i {
+        font-size: 11px !important;
+    }
+}

@@ -1,0 +1,38 @@
+.chartContainer {
+    overflow: auto;
+}
+
+.chart {
+    width: 100%;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+.axis {
+    stroke: #ccc;
+    stroke-width: 1px;
+}
+
+.gridLine {
+    stroke: #eee;
+    stroke-width: 1px;
+    stroke-dasharray: 2;
+}
+
+.line {
+    fill: none;
+    stroke: #6666e3;
+    stroke-width: 2px;
+}
+
+.point {
+    fill: black;
+    stroke: #6666e3;
+    stroke-width: 1px;
+}
+
+.label {
+    fill: #666;
+    font-size: 12px;
+    text-anchor: middle;
+}

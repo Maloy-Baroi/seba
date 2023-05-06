@@ -1,0 +1,40 @@
+.pageHeader {
+    padding: 25px !important;
+}
+
+.pageHeader h4 {
+    font-weight: 700;
+    color: #212B36 !important;
+    font-size: 18px;
+}
+
+.pageHeader h6 {
+    font-size: 14px;
+    color: #555;
+    font-weight: 400;
+}
+
+.searchInputField {
+    background-color: transparent;
+    height: 42px;
+    border: 1px solid #b9b9b9;
+    width: 90%;
+    border-radius: 5px;
+    padding: 0 15px 0;
+}
+
+.searchInputField:focus {
+    border: 1px solid #b9b9b9 !important;
+}
+
+.searchBtn {
+    margin-left: -50px;
+}
+
+.extraWork {
+    float: right;
+}
+
+.extraWork span {
+    padding: 0 10px;
+}

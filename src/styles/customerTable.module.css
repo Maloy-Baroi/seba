@@ -1,0 +1,129 @@
+
+.table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table thead {
+    background-color: #FF9F43;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.table thead:hover tr {
+    background-color: #FF9F43;
+}
+
+.table tr {
+    padding: .35em;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(204, 255, 205, 0.56) !important;
+}
+
+.table tbody tr:hover td {
+    font-weight: bold !important;
+}
+
+.table tr td {
+    font-size: 13.5px !important;
+    font-weight: 400;
+    height: 67px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 5px !important;
+    text-align: center;
+}
+
+.table th,
+.table td {
+    padding: 10px 30px 10px 30px !important;
+    text-align: left;
+    color: #000000;
+    border-bottom: 1px solid #E9ECEF;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table th {
+    margin: 0 0 5px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.AddToSellBtn {
+    width: 100px !important;
+    height: 35px !important;
+    background-color: transparent;
+    border: 1px solid #FF9F43;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.AddToSellBtn:hover {
+    background-color: #FF9F43;
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    .table {
+        border: 0;
+    }
+
+    .table caption {
+        font-size: 1.3em;
+    }
+
+    .table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .table td {
+        height: 67px;
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    .table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+.itemName {
+    font-size: 14px;
+}
+.brandName {
+    font-size: 12px;
+    font-weight: normal;
+}

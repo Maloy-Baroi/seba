@@ -1,0 +1,41 @@
+.formGroup {
+    margin-bottom: 25px;
+}
+
+.formGroup label {
+    margin-bottom: 10px;
+    color: #212b36;
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+}
+
+.formGroup textarea {
+    border: 1px solid rgba(145, 158, 171, .32);
+    height: 100px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.btnSubmit {
+    min-width: 120px;
+    background: #ff9f43;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 35px;
+    padding: 14px 10px;
+    -webkit-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+.btnSubmit:hover {
+    background: #ff9f43;
+    color: #fff;
+}
+

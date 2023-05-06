@@ -1,0 +1,23 @@
+input {
+    border: 1px solid rgba(145, 158, 171, 0.32);
+    -webkit-transition: 0.2s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 1px solid #ff9f43 !important;
+    box-shadow: none;
+}
+
+select:focus {
+    border: 1px solid #3b28c9;
+    box-shadow: none;
+}
+
+input:target {
+    border: 1px solid #ff9f43 !important;
+}
+
+input:active {
+    border: 1px solid #ff9f43 !important;
+}

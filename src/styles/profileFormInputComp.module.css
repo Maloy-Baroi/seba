@@ -1,0 +1,94 @@
+.label {
+    margin-bottom: 8px;
+    color: #212B36;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-flex;
+}
+
+.mandatory {
+    display: block;
+    color: #ff0000;
+}
+
+.notMandatory {
+    display: none;
+}
+
+.input {
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.input::placeholder {
+    font-size: 13px;
+    color: rgba(103, 116, 142, 0.75);
+}
+
+.imageUpload {
+    border: 1px solid rgba(145, 158, 171, 0.32);
+    position: relative;
+    margin-bottom: 35px;
+    border-radius: 5px;
+}
+
+.fileInput {
+    width: 100%;
+    opacity: 0;
+    height: 150px;
+    position: relative;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.imageUploads {
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+}
+
+.imageUploads i {
+    color: #ec8621;
+}
+
+
+.btnSubmit {
+    min-width: 120px;
+    background: #FF9F43;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 10px;
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.btnSubmit:hover {
+    background: #ff9f43;
+    color: #000000;
+}
+
+.btnCancel {
+    min-width: 120px;
+    background: #637381;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 10px;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.btnCancel:hover {
+    background: #637381;
+    color: #fff6f0;
+}

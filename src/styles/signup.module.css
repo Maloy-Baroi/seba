@@ -1,0 +1,36 @@
+.formContainer {
+    padding: 50px;
+    margin: 50px;
+    box-shadow: 0 0 10px #ddd;
+}
+
+.legend {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    outline: none;
+}
+
+
+.input:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.submitBtn {
+    border: none;
+    background-color: brown;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: 600;
+}

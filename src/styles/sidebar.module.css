@@ -1,0 +1,113 @@
+.sidebar {
+    width: 260px !important;
+    /*background-color: #212B36 !important;*/
+}
+
+.sidebarHr hr {
+    width: 100%;
+    margin: 5px 0 5px !important;
+}
+
+.mainUl {
+    padding: 0;
+}
+
+.mainUl li {
+    list-style-type: none;
+}
+
+.mainUl li h6 {
+    font-size: 14px !important;
+    font-weight: 700;
+    /*color: #ffffff;*/
+}
+
+.sidebarNavUl {
+    padding: 10px 0;
+}
+
+.sidebarNavUl li {
+    list-style-type: none;
+    border-radius: 8px;
+    padding: 8px 15px !important;
+}
+
+.sidebarNavUl li a {
+    text-decoration: none;
+    color: #67748E;
+}
+
+.sidebarNavUl li:hover {
+    background-color: #fff6f0;
+}
+
+.sidebarNavUl li:hover a {
+    color: #FF9F43;
+    font-weight: 600;
+}
+
+.sidebarNavUl li svg {
+    width: 18px;
+    margin-right: 10px;
+}
+
+.sidebarNavUl .active {
+    background: rgba(254, 159, 67, 0.08);
+    color: #FF9F43;
+}
+
+.sidebarNavUl .active a {
+    color: #FF9F43;
+}
+
+/* Media queries for different screen sizes */
+
+/* Styles for screens with a maximum width of 767px */
+@media (max-width: 767px) {
+    .sidebar {
+        width: 100% !important;
+    }
+
+    .sidebarNavUl li {
+        padding: 8px !important;
+    }
+
+    .sidebarNavUl li svg {
+        width: 13px;
+    }
+
+    .sidebarNavUl li span {
+        font-size: 13px;
+    }
+}
+
+/* Styles for screens with a minimum width of 768px and a maximum width of 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+    .sidebar {
+        width: 220px !important;
+    }
+
+    .sidebarNavUl li {
+        padding: 10px 12px !important;
+    }
+
+    .sidebarNavUl li svg {
+        width: 13px;
+    }
+
+    .sidebarNavUl li span {
+        font-size: 13px;
+    }
+}
+
+/* Styles for screens with a minimum width of 992px and a maximum width of 1199px */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .sidebar {
+        width: 240px !important;
+    }
+}
+
+/* Styles for screens with a minimum width of 1200px */
+@media (min-width: 1200px) {
+    /* Additional styles for larger screens */
+}

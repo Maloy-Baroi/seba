@@ -1,0 +1,129 @@
+.container {
+    overflow-x: hidden;
+}
+
+.loginContainer {
+    padding: 30px;
+    background-color: #f6f6f6;
+    height: 100vh;
+}
+
+.rhsSytle {
+    background-image: url("../assets/image/login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logoNormal {
+    text-align: center;
+    display: block;
+}
+
+.loginUserheading {
+    margin: 150px 0 30px;
+}
+
+@media screen and (max-height: 660px){
+    .loginUserheading {
+        margin: 50px 0 30px;
+    }
+}
+
+.loginUserheading h3 {
+    font-family: "Nunito", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 15px;
+    color: #000;
+}
+
+.loginUserheading h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #212B36;
+    line-height: 1.4;
+}
+
+.formLogin {
+    margin-bottom: 15px;
+}
+
+.formInputContainer label {
+    width: 100%;
+    color: #212B36;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.formInputContainer input {
+    width: 90%;
+    height: 40px !important;
+    border: 1px solid #FF9F43;
+    border-radius: 5px;
+    padding: 0 15px;
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.formInputContainer input::placeholder {
+    font-size: 14px;
+}
+
+.formInputContainer input:focus {
+    border-color: yellow !important;
+}
+
+.formInputContainer i {
+    margin-left: -30px;
+}
+
+.formInputContainer {
+    margin-bottom: 15px !important;
+}
+
+.forgetPasswordText a {
+    font-size: 15px;
+    color: #FF9F43;
+    text-decoration: none;
+}
+
+.signInButton {
+    width: 100%;
+    font-weight: 700;
+    background: #FF9F43;
+    border-color: #FF9F43;
+    padding: 12px;
+    -ms-transition: all 0.75s ease;
+    transition: all 0.75s ease;
+    margin-top: 15px;
+    color: #fff;
+}
+
+.signInButton:hover {
+    border-color: #FF9F43;
+    box-shadow: 0 50px #fff inset !important;
+    color: #FF9F43;
+}
+
+.homeButtonContainer {
+    text-align: center;
+}
+
+.homeButton {
+    width: 50%;
+    font-weight: 700;
+    background: #FF9F43;
+    border-color: #FF9F43;
+    padding: 12px;
+    -ms-transition: all 0.75s ease;
+    transition: all 0.75s ease;
+    margin-top: 15px;
+    color: #fff;
+}
+
+.homeButton:hover {
+    border-color: #FF9F43;
+}

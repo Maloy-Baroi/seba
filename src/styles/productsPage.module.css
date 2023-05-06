@@ -1,0 +1,176 @@
+.pageHeader {
+    padding: 25px !important;
+}
+
+.pageHeader h4 {
+    font-weight: 700;
+    color: #212B36 !important;
+    font-size: 18px;
+}
+
+.pageHeader h6 {
+    font-size: 14px;
+    color: #555;
+    font-weight: 400;
+}
+
+.searchInputField {
+    background-color: transparent;
+    height: 42px;
+    border: 1px solid #b9b9b9;
+    width: 90%;
+    border-radius: 5px;
+    padding: 0 15px 0;
+}
+
+.searchInputField:focus {
+    border: 1px solid #b9b9b9 !important;
+}
+
+.searchBtn {
+    margin-left: -50px;
+}
+
+.extraWork {
+    float: right;
+}
+
+.extraWork span {
+    padding: 0 10px;
+}
+
+
+/* Slider Checkbox style */
+
+.labelSwitch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+}
+
+.labelSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.checkboxSlider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.checkboxSlider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .checkboxSlider {
+    background-color: #2196F3;
+}
+
+input:focus + .checkboxSlider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .checkboxSlider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.checkboxSlider.checkboxRound {
+    border-radius: 34px;
+}
+
+.checkboxSlider.checkboxRound:before {
+    border-radius: 50%;
+}
+
+/* Styles for screens with a maximum width of 767px */
+@media (max-width: 767px) {
+    .pageHeader h4 {
+        font-size: 16px;
+    }
+
+    .pageHeader h6 {
+        font-size: 12px;
+    }
+
+    .searchInputField {
+        width: 100%;
+    }
+
+    .searchBtn {
+        margin-left: 0;
+    }
+
+    .extraWork span {
+        padding: 0 5px;
+    }
+}
+
+/* Styles for screens with a minimum width of 768px and a maximum width of 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+    .pageHeader {
+        padding: 15px !important;
+    }
+
+    .searchInputField {
+        width: 80%;
+    }
+}
+
+/* Styles for screens with a minimum width of 992px and a maximum width of 1199px */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .pageHeader h4 {
+        font-size: 20px;
+    }
+
+    .searchInputField {
+        width: 70%;
+    }
+
+    .extraWork span {
+        padding: 0 15px;
+    }
+}
+
+/* Styles for screens with a minimum width of 1200px */
+@media (min-width: 1200px) {
+    .pageHeader {
+        padding: 30px !important;
+    }
+
+    .pageHeader h4 {
+        font-size: 24px;
+    }
+
+    .pageHeader h6 {
+        font-size: 16px;
+    }
+
+    .searchInputField {
+        width: 60%;
+    }
+
+    .extraWork span {
+        padding: 0 20px;
+    }
+}
+

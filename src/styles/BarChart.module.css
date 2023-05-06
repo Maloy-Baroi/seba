@@ -1,0 +1,33 @@
+.chartContainer {
+    overflow: auto;
+}
+
+.chart {
+    width: 400px;
+    height: 220px;
+}
+
+.axis {
+    stroke: #ccc;
+}
+
+.gridLine {
+    stroke: #eaeaea;
+}
+
+.bar {
+    fill: rgba(102, 102, 227, 0.44);
+    stroke: #3333a7;
+    stroke-width: 1;
+}
+
+.point {
+    fill: black;
+    r: 1; /* Adjust the point size by modifying the radius */
+}
+
+.label {
+    fill: black;
+    font-size: 12px;
+    font-weight: bold;
+}
