@@ -126,7 +126,7 @@ const login = () => {
                                     <div className={loginStyle.formInputContainer}>
                                         <div className={loginStyle.homeButtonContainer}>
                                             <button className={"btn " + loginStyle.homeButton}
-                                                    onClick={() => navigator.push('')}>
+                                                    onClick={() => navigator.push('/')}>
                                                 Back to Home
                                             </button>
                                         </div>
