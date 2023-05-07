@@ -49,8 +49,9 @@ const PageInvoice = () => {
 
     const onHandleSave = () => {
         print()
+        const userType = localStorage.getItem('group')
         window.onafterprint = () => {
-            navigator.push('seller/products')
+            navigator.push(`/${userType}/products`)
         };
     }
 
