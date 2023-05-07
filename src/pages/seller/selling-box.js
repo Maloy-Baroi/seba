@@ -91,7 +91,7 @@ const SellingBox = () => {
                     'Successfully ordered!',
                     'success'
                 )
-                navigator.push('seller/invoice-report')
+                navigator.push('invoice-report')
             })
             .catch(error => console.log('error', error));
     }
