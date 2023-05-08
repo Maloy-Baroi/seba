@@ -9,6 +9,7 @@ import {
 } from "@/pages/api/app_data"
 import productFormStyle from "@/styles/productForm.module.css";
 import {useRouter} from "next/router";
+import fetch from "isomorphic-unfetch";
 
 const CreateMedicineForm = () => {
     const [p_name, setPName] = useState("")
@@ -28,6 +29,7 @@ const CreateMedicineForm = () => {
     const [subCategories, setSubCategories] = useState([])
     const [allBrand, setBrand] = useState([])
     const [allShelf, setAllShelf] = useState([])
+    const [filteredProductName, setFilteredProductName] = useState([])
     const [categorySearchText, setCategorySearchText] = useState("");
     const [subCategorySearchText, setSubCategorySearchText] = useState("");
     const [brandSearchText, setBrandSearchText] = useState("");
@@ -36,68 +38,62 @@ const CreateMedicineForm = () => {
 
     const navigator = useRouter()
 
-    useEffect(() => {
-        const fetchProductNames = async () => {
-            const allProducts = await getMedicineInfoList()
-            setProductNames(allProducts)
+    const fetchSubCategories = async () => {
+        const allSubCategories = await getSubCategoryList();
+        setSubCategories(allSubCategories);
+    };
+
+    const fetchShelves = async () => {
+        const allShelves = await getShelfList()
+        setAllShelf(allShelves);
+    }
+
+    const fetchConsumptionType = async () => {
+        const allTypeOfConsumption = await getConsumptionTypeList();
+        setAllConsumptionType(allTypeOfConsumption);
+    };
+
+    const searchProduct = async (inputVal) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${localStorage.getItem('access_token')}`);
+
+        var formdata = new FormData();
+        formdata.append("medicine_name", inputVal);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
         };
 
-        const fetchCategories = async () => {
-            const allCategories = await getCategoryList();
-            setCategories(allCategories);
-        };
+        fetch("https://seba-backend.xyz/api-product/medicines-info/", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                setFilteredProductName(result);
+                fetchSubCategories().then(r => true);
+                fetchShelves().then(r => true);
+                fetchConsumptionType().then(r => true)
+            })
+            .catch(error => console.log('error', error));
+    }
 
-        const fetchSubCategories = async () => {
-            const allSubCategories = await getSubCategoryList();
-            setSubCategories(allSubCategories);
-        };
-
-        const fetchBrands = async () => {
-            const allBrands = await getBrandList();
-            setBrand(allBrands);
-        };
-
-        const fetchShelves = async () => {
-            const allShelves = await getShelfList()
-            setAllShelf(allShelves);
-        }
-
-        const fetchConsumptionType = async () => {
-            const allTypeOfConsumption = await getConsumptionTypeList();
-            setAllConsumptionType(allTypeOfConsumption);
-        };
-
-        fetchProductNames().then(r => true);
-        fetchCategories().then(r => true);
-        fetchSubCategories().then(r => true);
-        fetchBrands().then(r => true);
-        fetchShelves().then(r => {
-        });
-        fetchConsumptionType().then(r => true)
-    });
-
-    const filteredProductName = productNames.length>0 ? productNames.filter((prod) => {
-        return prod.product_name.toLowerCase().startsWith(p_name.toLowerCase());
-    }): [];
-
-    const filteredCategories = categories.length>0 ? categories.filter((category) => {
-        return category.name.toLowerCase().startsWith(categorySearchText.toLowerCase());
-    }) : [];
-
-    const filteredSubCategories = subCategories.length>0 ? subCategories.filter((category) => {
+    const filteredSubCategories = subCategories.length > 0 ? subCategories.filter((category) => {
         return category.name.toLowerCase().startsWith(subCategorySearchText.toLowerCase());
     }) : [];
 
-    const filteredBrand = allBrand.length>0 ? allBrand.filter((category) => {
-        return category.name.toLowerCase().startsWith(brandSearchText.toLowerCase());
-    }) : [];
 
     const handleProductNameInputChange = (event) => {
         let prodName = document.getElementById("productNamesID")
         prodName.style.display = "block";
-        setPName(event.target.value);
-        let specialisedForID = document.getElementById("specialisedForID")
-        p_name.length > 0 ? specialisedForID.style.display = "block" : specialisedForID.style.display = "none"
+        let inputVal = event.target.value;
+        setPName(inputVal)
+        if (inputVal.length > 2) {
+            searchProduct(inputVal).then(r => true);
+            let specialisedForID = document.getElementById("specialisedForID")
+            p_name.length > 1 ? specialisedForID.style.display = "block" : specialisedForID.style.display = "none"
+
+        }
     }
 
     const handleProductNameSelect = (productName, productStrength, productType, productGen, productCom) => {
@@ -111,20 +107,11 @@ const CreateMedicineForm = () => {
     }
 
     const handleCategoryInputChange = (event) => {
-        let generics = document.getElementById("genericID")
-        generics.style.display = "block";
         setCategorySearchText(event.target.value);
     }
 
-    const handleCategorySelect = (categoryName) => {
-        setCategorySearchText(categoryName);
-        let generics = document.getElementById("genericID")
-        generics.style.display = "none";
-    }
-
-
     const handleSubCategoryInputChange = (event) => {
-        let specialisedForID = document.getElementById("specialisedForID")
+        let specialisedForID = document.getElementById("specialisedForID");
         specialisedForID.style.display = "block";
         setSubCategorySearchText(event.target.value);
     }
@@ -136,15 +123,7 @@ const CreateMedicineForm = () => {
     }
 
     const handleBrandInputChange = (event) => {
-        let brandID = document.getElementById("brandID")
-        brandID.style.display = "block";
         setBrandSearchText(event.target.value);
-    }
-
-    const handleBrandSelect = (brandName) => {
-        setBrandSearchText(brandName);
-        let brandForID = document.getElementById("brandID")
-        brandForID.style.display = "none";
     }
 
     const onHandleSubmitForm = (e) => {
@@ -174,7 +153,7 @@ const CreateMedicineForm = () => {
             requestBody.imported = true;
         }
 
-        fetch('https://seba-backend.xyz/api-product/products/', {
+        fetch('https://seba-backend.xyz/api-product/products-list/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -185,13 +164,20 @@ const CreateMedicineForm = () => {
             .then(response => response.json())
             .then(data =>
                 // eslint-disable-next-line react-hooks/exhaustive-deps
-                navigator.push('/seller/products')
+                navigator.push('/seller/medicines')
             )
             .catch(error => console.error(error))
     }
 
     return (
         <>
+            <ul>
+                {
+                    productNames && productNames.map(item => (
+                        <li>{item.product_name}</li>
+                    ))
+                }
+            </ul>
             <div className="card">
                 <div className="card-body">
                     <div className={"row"}>
@@ -220,16 +206,16 @@ const CreateMedicineForm = () => {
                                 >
                                     {
                                         filteredProductName && filteredProductName.length > 0 ?
-                                        filteredProductName.map((prodName) => (
-                                            <li key={prodName.id}
-                                                onClick={() => handleProductNameSelect(prodName.product_name, prodName.strength, prodName.type, prodName.generics, prodName.company)}
-                                                style={{
-                                                    cursor: "pointer"
-                                                }}>
-                                                {prodName.product_name} ({prodName.strength})
-                                            </li>
-                                        ))
-                                        : ""
+                                            filteredProductName.map((prodName) => (
+                                                <li key={prodName.id}
+                                                    onClick={() => handleProductNameSelect(prodName.product_name, prodName.strength, prodName.type, prodName.generics, prodName.company)}
+                                                    style={{
+                                                        cursor: "pointer"
+                                                    }}>
+                                                    {prodName.product_name} ({prodName.strength})
+                                                </li>
+                                            ))
+                                            : ""
                                     }
                                 </ul>
                             </div>
@@ -239,25 +225,6 @@ const CreateMedicineForm = () => {
                                 <label>Generic Name*</label>
                                 <input type={"text"} className={"form-control"} value={categorySearchText}
                                        onChange={handleCategoryInputChange} placeholder={"Generic Name"}/>
-                                <ul id={"genericID"} style={
-                                    categorySearchText.length > 0 ?
-                                        {display: "block", height: "200px", overflow: "scroll"} :
-                                        {display: "none"}
-                                }
-                                >
-                                    {
-                                        filteredCategories && filteredCategories.length > 0 ?
-                                        filteredCategories.map((category) => (
-                                        <li key={category.id} onClick={() => handleCategorySelect(category.name)}
-                                            style={{
-                                                cursor: "pointer"
-                                            }}>
-                                            {category.name}
-                                        </li>
-                                    ))
-                                    : ""
-                                }
-                                </ul>
                             </div>
                         </div>
                         <div className={"col-md-3"}>
@@ -273,15 +240,15 @@ const CreateMedicineForm = () => {
                                 >
                                     {
                                         filteredSubCategories && filteredSubCategories.length > 0 ?
-                                        filteredSubCategories.map((sub_category) => (
-                                            <li key={sub_category.id}
-                                                onClick={() => handleSubCategorySelect(sub_category.name)} style={{
-                                                cursor: "pointer"
-                                            }}>
-                                                {sub_category.name}
-                                            </li>
-                                        ))
-                                        : ""
+                                            filteredSubCategories.map((sub_category) => (
+                                                <li key={sub_category.id}
+                                                    onClick={() => handleSubCategorySelect(sub_category.name)} style={{
+                                                    cursor: "pointer"
+                                                }}>
+                                                    {sub_category.name}
+                                                </li>
+                                            ))
+                                            : ""
                                     }
                                 </ul>
                             </div>
@@ -291,24 +258,6 @@ const CreateMedicineForm = () => {
                                 <label>Brand Name*</label>
                                 <input type={"text"} className={"form-control"} value={brandSearchText}
                                        onChange={handleBrandInputChange} placeholder={"Brand"}/>
-                                <ul id={"brandID"} style={
-                                    brandSearchText.length > 0 ?
-                                        {display: "block", height: "200px", overflowY: "auto", overflowX: "hidden"} :
-                                        {display: "none"}
-                                }
-                                >
-                                    {
-                                        filteredBrand && filteredBrand.length>0 ?
-                                        filteredBrand.map((brand_) => (
-                                            <li key={brand_.id} onClick={() => handleBrandSelect(brand_.name)} style={{
-                                                cursor: "pointer"
-                                            }}>
-                                                {brand_.name}
-                                            </li>
-                                        ))
-                                        : ""
-                                    }
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -323,13 +272,13 @@ const CreateMedicineForm = () => {
                                         }>
                                     <option>Select type (capsule/table)</option>
                                     {
-                                        allConsumptionType && allConsumptionType.length > 0 ? 
-                                        allConsumptionType.map((item, index) => {
-                                            return (
-                                                <option key={index}>{item.type_name}</option>
-                                            )
-                                        })
-                                        : ""
+                                        allConsumptionType && allConsumptionType.length > 0 ?
+                                            allConsumptionType.map((item, index) => {
+                                                return (
+                                                    <option key={index}>{item.type_name}</option>
+                                                )
+                                            })
+                                            : ""
                                     }
                                 </select>
                             </div>
@@ -392,13 +341,13 @@ const CreateMedicineForm = () => {
                                         onChange={e => setShelfNumber(e.target.value)}>
                                     <option>select shelf</option>
                                     {
-                                        allShelf.length>0 ?
-                                        allShelf.map((shelf) => (
-                                            <option key={shelf.id}>
-                                                Shelf: {shelf.number} Row: {shelf.row} Column: {shelf.column}
-                                            </option>
-                                        ))
-                                        : ""
+                                        allShelf.length > 0 ?
+                                            allShelf.map((shelf) => (
+                                                <option key={shelf.id}>
+                                                    Shelf: {shelf.number} Row: {shelf.row} Column: {shelf.column}
+                                                </option>
+                                            ))
+                                            : ""
                                     }
                                 </select>
                             </div>
