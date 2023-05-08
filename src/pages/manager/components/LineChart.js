@@ -19,7 +19,7 @@ const LineChart = () => {
         labels: data.map((item) => item.month),
         datasets: [
             {
-                label: "Total Sales",
+                label: "Profit Graph",
                 data: data.map((item) => item.no_of_sales),
                 backgroundColor: "rgba(75, 192, 192, 0.2)",
                 borderColor: "rgba(75, 192, 192, 1)",

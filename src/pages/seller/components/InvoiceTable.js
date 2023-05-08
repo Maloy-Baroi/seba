@@ -12,6 +12,7 @@ const InvoiceTable = () => {
 
     const fetchOrderData = async () => {
         const ordersList = await getOrderListForLoginUser();
+        console.log(ordersList)
         setOrders(ordersList);
     }
 
@@ -107,9 +108,16 @@ const InvoiceTable = () => {
                     <div className={"col-md-3"}>
                         Payment Method
                     </div>
-                    <div className={"col-md-1"}>
-                        Action
-                    </div>
+                    {
+                        user_type && user_type==="manager" ?
+                            <div className={"col-md-1"}>
+                                Profit
+                            </div>
+                            :
+                            <div className={"col-md-1"}>
+                                Action
+                            </div>
+                    }
                 </div>
                 <hr/>
                 {filterOrder ?
@@ -155,10 +163,18 @@ const InvoiceTable = () => {
                                 <div className={"col-md-3"}>
                                     {item.payment_method}
                                 </div>
-                                <div className={"col-md-1"}>
-                                    <button className={"btn btn-danger"} onClick={() => handlePrint(item.id)}>Print
-                                    </button>
-                                </div>
+                                {
+                                    user_type && user_type === "manager" ?
+                                        <div className={"col-md-1"}>
+                                            {item.get_total_profit}
+                                        </div>
+                                        :
+                                        <div className={"col-md-1"}>
+                                            <button className={"btn btn-danger"}
+                                                    onClick={() => handlePrint(item.id)}>Print
+                                            </button>
+                                        </div>
+                                }
                             </div>
                         )
                     })

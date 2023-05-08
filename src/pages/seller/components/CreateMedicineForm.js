@@ -39,7 +39,6 @@ const CreateMedicineForm = () => {
     useEffect(() => {
         const fetchProductNames = async () => {
             const allProducts = await getMedicineInfoList()
-            console.log("All Products", allProducts)
             setProductNames(allProducts)
         };
 
@@ -73,7 +72,6 @@ const CreateMedicineForm = () => {
         fetchSubCategories().then(r => true);
         fetchBrands().then(r => true);
         fetchShelves().then(r => {
-            console.log(allShelf)
         });
         fetchConsumptionType().then(r => true)
     });
