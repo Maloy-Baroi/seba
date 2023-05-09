@@ -7,6 +7,8 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {console} from "next/dist/compiled/@edge-runtime/primitives/console";
 import Swal from "sweetalert2"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SellingBox = () => {
     const [boxProduct, setBoxProduct] = useState([])
@@ -50,6 +52,11 @@ const SellingBox = () => {
         fetch("https://seba-backend.xyz/api-seller/cart-list/", requestOptions)
             .then(response => response.json())
             .then(result => {
+                if (result.length === 0) {
+                    setTimeout(() => {
+                        navigator.push('/seller/medicines')
+                    }, 3000)
+                }
                 setBoxProduct(result)
             })
             .catch(error => console.log('error', error));
@@ -111,12 +118,13 @@ const SellingBox = () => {
         };
 
         fetch("https://seba-backend.xyz/api-seller/cart-delete/", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
+            .then(response => response.json())
+            .then(result => {
+                toast.success("Item deleted successfully!", { autoClose: 1000 });
+                takeCartData();
+                setBoxProductChanged(true);
+            })
             .catch(error => console.log('error', error));
-
-        takeCartData();
-        setBoxProductChanged(true);
     }
 
     useEffect(() => {
@@ -128,9 +136,10 @@ const SellingBox = () => {
 
     return (
         <>
+            <ToastContainer />
             <OnlyHead page={"Selling Box"}/>
             <main>
-                <DashboardNavbar />
+                <DashboardNavbar/>
                 <div className={"row w-100"}>
                     <div className={"col-md-2 " + dashboardStyle.sidebarContainer}>
                         <Sidebar/>

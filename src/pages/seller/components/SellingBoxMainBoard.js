@@ -1,21 +1,21 @@
 import MainboardHead from "@/pages/seller/components/MainboardHead";
 import {useEffect, useState} from "react";
 import sellingBoxStyle from "@/styles/sellBox.module.css"
-import {console} from "next/dist/compiled/@edge-runtime/primitives/console";
 
 const SellingBoxMainBoard = ({boxItems, handleSellSubmission, deleteItem, onHandleWrittenQuantity}) => {
     const [customerName, setCustomerName] = useState("")
     const [customerPhn, setCustomerPhn] = useState("")
     const [paymentMethod, setPaymentMethod] = useState("")
     const [customerProfiles, setCustomerProfiles] = useState([])
+    const [discountPercentage, setDiscountPercentage] = useState(0)
 
     const getTotalPrice = () => {
         let total = 0;
-        boxItems ? boxItems.length > 0 ? 
-        boxItems.map((item) => {
-            total += item.get_total;
-        })
-    : total=0 : "" ;
+        boxItems ? boxItems.length > 0 ?
+            boxItems.map((item) => {
+                total += item.get_total;
+            })
+            : total = 0 : "";
         return total.toFixed(2);
     }
 
@@ -101,45 +101,46 @@ const SellingBoxMainBoard = ({boxItems, handleSellSubmission, deleteItem, onHand
                                 <hr/>
                                 {
                                     boxItems && boxItems.length > 0 ?
-                                    boxItems.map((item) => (
-                                        <div key={item.id}>
-                                            <div className={"row text-center mb-2 mt-2 " + sellingBoxStyle.tabRow}>
-                                                <div className={"col-md-3"}>
-                                                    <div className={"row"}>
-                                                        <div className={"col-md-2"}>
-                                                            <button className={"btn btn-danger"}
-                                                                    onClick={() => deleteItem(item.id)}>
-                                                                <i className={"fa fa-close"}></i>
-                                                            </button>
-                                                        </div>
-                                                        <div className={"col-md-10"}>
-                                                            <h5>{item.get_product_name}</h5>
+                                        boxItems.map((item) => (
+                                            <div key={item.id}>
+                                                <div className={"row text-center mb-2 mt-2 " + sellingBoxStyle.tabRow}>
+                                                    <div className={"col-md-3"}>
+                                                        <div className={"row"}>
+                                                            <div className={"col-md-2"}>
+                                                                <button className={"btn btn-danger"}
+                                                                        onClick={() => deleteItem(item.id)}>
+                                                                    <i className={"fa fa-close"}></i>
+                                                                </button>
+                                                            </div>
+                                                            <div className={"col-md-10"}>
+                                                                <h5>{item.get_product_name}</h5>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className={"col-md-3"}>
-                                                    <h5>{item.get_product_strength}</h5>
-                                                </div>
-                                                <div className={"col-md-3"}>
-                                                    <h5 style={{
-                                                        display: "inline-flex",
-                                                        justifyContent: "center"
-                                                    }}>
-                                                        <input type={"number"} min={"1"} className={'form-control w-50'}
-                                                               value={item.quantity}
-                                                               onChange={e => onHandleWrittenQuantity(item.product, e.target.value, item.quantity)}
-                                                        />
-                                                    </h5>
-                                                </div>
-                                                <div className={"col-md-3"}>
-                                                    <h5>
-                                                        &#2547; {item.get_total}
-                                                    </h5>
+                                                    <div className={"col-md-3"}>
+                                                        <h5>{item.get_product_strength}</h5>
+                                                    </div>
+                                                    <div className={"col-md-3"}>
+                                                        <h5 style={{
+                                                            display: "inline-flex",
+                                                            justifyContent: "center"
+                                                        }}>
+                                                            <input type={"number"} min={"1"}
+                                                                   className={'form-control w-50'}
+                                                                   value={item.quantity}
+                                                                   onChange={e => onHandleWrittenQuantity(item.product, e.target.value, item.quantity)}
+                                                            />
+                                                        </h5>
+                                                    </div>
+                                                    <div className={"col-md-3"}>
+                                                        <h5>
+                                                            &#2547; {item.get_total}
+                                                        </h5>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))
-                                    : ""
+                                        ))
+                                        : ""
                                 }
                             </div>
                         </div>
@@ -150,15 +151,15 @@ const SellingBoxMainBoard = ({boxItems, handleSellSubmission, deleteItem, onHand
             <form className={"form-group mt-3 mb-3"}>
                 <legend>Customer Details</legend>
                 <div className={"row"}>
-                    <div className={"col-md-4"}>
-                        <input className={"form-control"} placeholder={"Customer Name"} value={customerName}
-                               onChange={e => setCustomerName(e.target.value)}/>
-                    </div>
-                    <div className={"col-md-4"}>
+                    <div className={"col-md-3"}>
                         <input className={"form-control"} placeholder={"Customer Phone"} value={customerPhn}
                                onChange={e => setCustomerPhn(e.target.value)}/>
                     </div>
                     <div className={"col-md-4"}>
+                        <input className={"form-control"} placeholder={"Customer Name"} value={customerName}
+                               onChange={e => setCustomerName(e.target.value)}/>
+                    </div>
+                    <div className={"col-md-3"}>
                         <select className={"form-control"} value={paymentMethod}
                                 onChange={e => setPaymentMethod(e.target.value)}>
                             <option>Select Payment Method</option>
@@ -171,6 +172,11 @@ const SellingBoxMainBoard = ({boxItems, handleSellSubmission, deleteItem, onHand
                             <option>Credit Card</option>
                             <option>On Credit</option>
                         </select>
+                    </div>
+                    <div className={"col-md-2"}>
+                        <input type={"number"} className={"form-control"} placeholder={"Discount Percentage"}
+                               value={discountPercentage} onChange={e => setDiscountPercentage(parseInt(e.target.value))}
+                        />
                     </div>
                 </div>
             </form>

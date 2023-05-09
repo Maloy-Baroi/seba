@@ -40,7 +40,7 @@ const StockFinishedProduct = () => {
                                 <th scope="col">Quantity Left</th>
                                 <th scope="col">Shelf</th>
                                 <th scope="col">Expiry Date</th>
-                                <th scope="col">Stock Date</th>
+                                <th scope="col">Stocked Date</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,18 +61,22 @@ const StockFinishedProduct = () => {
                                         }}>
                                             {item.category}
                                         </td>
-                                        <td data-label="Quantity Left">{item.quantity}</td>
+                                        <td className={"text-center"} data-label="Quantity Left">
+                                            <b className={"text-danger"}  style={{
+                                                fontSize: "25px"
+                                            }}>
+                                                {item.quantity}
+                                            </b>
+                                        </td>
                                         <td data-label="Brand">
                                             Shelf: {item.shelf.split(", ")[0]} <br/>
                                             Row: {item.shelf.split(", ")[1]} <br/>
                                             Column: {item.shelf.split(", ")[2]}
                                         </td>
                                         <td data-label="Expiry Date">
-                                            <b>
-                                                {formatDate(item.expiry_date)}
-                                            </b>
+                                            {formatDate(item.expiry_date)}
                                         </td>
-                                        <td data-label="Stock Date">
+                                        <td data-label="Stocked Date">
                                             <b>
                                                 {formatDate(item.created_at)}
                                             </b>

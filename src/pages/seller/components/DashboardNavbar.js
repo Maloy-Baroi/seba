@@ -18,7 +18,6 @@ const DashboardNavbar = () => {
 
     const findExpiryProductNotification = async () => {
         const alertQ = await getNearToExpiredDate();
-        console.log(alertQ)
         setExpiryNotificationQuantity(alertQ.length)
     }
 

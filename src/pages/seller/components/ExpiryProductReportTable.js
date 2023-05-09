@@ -69,7 +69,10 @@ const ExpiryProductReportTable = () => {
                                         Column: {item.shelf.split(", ")[2]}
                                     </td>
                                     <td data-label="Expiry Date">
-                                        <b>
+                                        <b style={{
+                                            fontSize: "21px",
+                                            color: "darkred"
+                                        }}>
                                             {formatDate(item.expiry_date)}
                                         </b>
                                     </td>
