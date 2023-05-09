@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import styles from "@/styles/LineChart.module.css";
-import { getMonthlyTotalSales } from "@/pages/api/app_data";
+import {getMonthlyTotalSales, getMonthSales} from "@/pages/api/app_data";
 import { Line } from "react-chartjs-2";
 
 const LineChart = () => {
-    const [data, setData] = useState([]);
+    const [profitData, setProfitData] = useState([]);
 
     const fetchMonthVsTotal = async () => {
-        const allData = await getMonthlyTotalSales();
-        setData(allData);
+        const allData = await getMonthSales();
+        setProfitData(allData);
     };
 
     useEffect(() => {
@@ -16,11 +16,11 @@ const LineChart = () => {
     }, []);
 
     const chartData = {
-        labels: data.map((item) => item.month),
+        labels: profitData.map((item) => item.month),
         datasets: [
             {
                 label: "Profit Graph",
-                data: data.map((item) => item.no_of_sales),
+                data: profitData.map((item) => item.total_sell),
                 backgroundColor: "rgba(75, 192, 192, 0.2)",
                 borderColor: "rgba(75, 192, 192, 1)",
                 borderWidth: 1,
