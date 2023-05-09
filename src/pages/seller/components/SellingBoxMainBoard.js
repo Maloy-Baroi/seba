@@ -185,7 +185,7 @@ const SellingBoxMainBoard = ({boxItems, handleSellSubmission, deleteItem, onHand
                     <div className={"mt-4"}>
                         {customerName && customerPhn && boxItems && boxItems.length > 0 ?
                             <button className={"btn btn-danger btn-md w-75"}
-                                    onClick={() => handleSellSubmission(customerName, customerPhn, paymentMethod)}>
+                                    onClick={() => handleSellSubmission(customerName, customerPhn, paymentMethod, discountPercentage)}>
                                 Sell
                             </button>
                             :

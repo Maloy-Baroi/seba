@@ -73,7 +73,7 @@ const SellingBox = () => {
     };
 
 
-    const handleSellSubmission = async (customerName, customerPhn, payment_method) => {
+    const handleSellSubmission = async (customerName, customerPhn, payment_method, discount) => {
         // e.preventDefault();
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${localStorage.getItem("access_token")}`);
@@ -82,6 +82,7 @@ const SellingBox = () => {
         formdata.append("baler_customer", customerName);
         formdata.append("phone", customerPhn);
         formdata.append("payment_method", payment_method);
+        formdata.append("discount", discount);
 
         var requestOptions = {
             method: 'POST',

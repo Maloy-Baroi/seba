@@ -166,7 +166,7 @@ const InvoiceTable = () => {
                                 {
                                     user_type && user_type === "manager" ?
                                         <div className={"col-md-1"}>
-                                            {item.get_total_profit}
+                                            {item.get_total_profit.toFixed(2)}
                                         </div>
                                         :
                                         <div className={"col-md-1"}>
