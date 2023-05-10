@@ -3,32 +3,31 @@ import {useState, useEffect} from "react";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-    getMedicineList2,
-    getProductList2
+    getMedicineList2
 } from "@/pages/api/app_data";
 
 
 const MedicinesTable = (props) => {
-    const [products, setProducts] = useState([]);
+    const [medicines, setMedicines] = useState([]);
     const [userType, setUserType] = useState("")
 
     const searchOption = () => {
-        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(props.searchValue.toLowerCase()) || product.category.toLowerCase().includes(props.searchValue.toLowerCase()));
-        setProducts(filteredProducts);
+        const filteredProducts = medicines.filter(product => product.name.toLowerCase().includes(props.searchValue.toLowerCase()) || product.category.toLowerCase().includes(props.searchValue.toLowerCase()));
+        setMedicines(filteredProducts);
     }
 
     const fetchMedicines = async () => {
         let all_prod2 = await getMedicineList2(1);
-        setProducts(all_prod2.results);
+        setMedicines(all_prod2.results);
         console.log(all_prod2);
         let next_page_number = all_prod2.next.slice(-1);
         while (all_prod2.next !== null) {
             next_page_number = all_prod2.next.slice(-1);
-            all_prod2 = await getProductList2(next_page_number);
+            all_prod2 = await getMedicineList2(next_page_number);
             const newProducts = all_prod2.results.filter(
-                (product) => !products.find((p) => parseInt(p.id) === parseInt(product.id))
+                (product) => !medicines.find((p) => parseInt(p.id) === parseInt(product.id))
             );
-            setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+            setMedicines((prevProducts) => [...prevProducts, ...newProducts]);
         }
     }
 
@@ -60,7 +59,7 @@ const MedicinesTable = (props) => {
             .then(response => response.json())
             .then(result => {
                 console.log(result['message'])
-                const updatedItems = products ? products.map((item) => {
+                const updatedItems = medicines ? medicines.map((item) => {
                     if (item.id === id) {
                         return {...item, quantity: item.quantity - 1};
                     } else {
@@ -68,7 +67,7 @@ const MedicinesTable = (props) => {
                     }
                 }) : "";
                 props.recallDashboard();
-                setProducts(updatedItems);
+                setMedicines(updatedItems);
                 toast.success('Product added', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000, // Close the toast after 3 seconds
@@ -103,8 +102,8 @@ const MedicinesTable = (props) => {
                             </thead>
                             <tbody>
                             {
-                                products.length > 0 ?
-                                    products.map((item, index) => (
+                                medicines.length > 0 ?
+                                    medicines.map((item, index) => (
                                         <tr key={index}>
                                             <td data-label="Name">
                                                 <p className={productsTableStyle.itemName}>{item.name} </p>
