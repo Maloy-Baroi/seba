@@ -3,10 +3,7 @@ import {useState, useEffect} from "react";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-    getCategoryList,
-    getMedicineList,
     getMedicineList2,
-    getProductList,
     getProductList2
 } from "@/pages/api/app_data";
 

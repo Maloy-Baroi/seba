@@ -7,7 +7,7 @@ export async function getMedicineList() {
 }
 
 export async function getMedicineList2(pageNumber) {
-    return await callApi(`api-product/medicine-list/${pageNumber}`);
+    return await callApi(`api-product/medicine-list/?page=${pageNumber}`);
 }
 
 export async function getProductList() {
