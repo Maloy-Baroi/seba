@@ -4,6 +4,7 @@ import LandingPage from "@/pages/component/LandingPage";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 import indexStyle from "@/styles/index.module.css";
+import Link from "next/link";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -42,7 +43,8 @@ export default function Home() {
             <footer className={indexStyle.footer}>
                 <div className="container">
                     <p className={indexStyle.footerText}>
-                        &copy; 2023 SEMSOFT LIMITED. All rights reserved.
+                        &copy; 2023 <Link href={"https://semsoftltd.com/"} target={"_blank"}>SEMSOFT LIMITED</Link>.
+                        All rights reserved.
                     </p>
                 </div>
             </footer>
