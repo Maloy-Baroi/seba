@@ -26,15 +26,13 @@ const ProductsTable = (props) => {
         setProducts(all_prod2.results);
         console.log(all_prod2);
         let next_page_number = all_prod2.next.slice(-1);
-        const addedBarcodes = new Set(all_prod2.results.map((product) => product.barcode_id));
         while (all_prod2.next !== null) {
             next_page_number = all_prod2.next.slice(-1);
             all_prod2 = await getProductList2(next_page_number);
             const newProducts = all_prod2.results.filter(
-                (product) => !addedBarcodes.has(product.barcode_id)
+                (product) => !products.find((p) => parseInt(p.id) === parseInt(product.id))
             );
             setProducts((prevProducts) => [...prevProducts, ...newProducts]);
-            newProducts.forEach((product) => addedBarcodes.add(product.barcode_id));
         }
     };
 
