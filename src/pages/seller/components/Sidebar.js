@@ -265,9 +265,15 @@ const Sidebar = (props) => {
                         </ul>
                     </li>
                 </ul>
-            </div>
+                    </div>
                 )
             }
+            <div>
+                <p className="attribution">
+                    A Software Created By &nbsp;
+                    <a className="attribution-link" href="https://semsoftltd.com/">SEMSOFT LIMITED</a>
+                </p>
+            </div>
         </>
     );
 }

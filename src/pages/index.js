@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google'
 import LandingPage from "@/pages/component/LandingPage";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
+import indexStyle from "@/styles/index.module.css";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -38,6 +39,13 @@ export default function Home() {
             <main>
                 <LandingPage/>
             </main>
+            <footer className={indexStyle.footer}>
+                <div className="container">
+                    <p className={indexStyle.footerText}>
+                        &copy; 2023 SEMSOFT LIMITED. All rights reserved.
+                    </p>
+                </div>
+            </footer>
         </>
     )
 }
