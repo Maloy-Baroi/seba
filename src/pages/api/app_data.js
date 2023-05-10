@@ -6,6 +6,10 @@ export async function getMedicineList() {
     return await callApi('api-product/medicine-list/');
 }
 
+export async function getMedicineList2(pageNumber) {
+    return await callApi(`api-product/medicine-list-2/${pageNumber}`);
+}
+
 export async function getProductList() {
     return await callApi('api-product/products-list/');
 }
