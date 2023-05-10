@@ -14,7 +14,7 @@ const PageInvoice = () => {
 
     const onHandlePrint = () => {
         console.log(order_id)
-        fetch(`http://127.0.0.1:8000/api-seller/single-order-view/${order_id}/`, {
+        fetch(`https://seba-backend.xyz/api-seller/single-order-view/${order_id}/`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,
             },
