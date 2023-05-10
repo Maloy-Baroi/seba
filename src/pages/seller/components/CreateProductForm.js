@@ -72,7 +72,7 @@ const CreateProductForm = () => {
             requestBody.imported = true;
         }
 
-        fetch('https://seba-backend.xyz/api-product/products-list/', {
+        fetch('https:///api-product/products-list/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const CreateProductForm = () => {
         })
             .then(response => response.json())
             .then(data =>
-                navigator.push('seller/products')
+                navigator.push('/seller/products')
             )
             .catch(error => console.error(error))
     }
