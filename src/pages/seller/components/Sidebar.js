@@ -271,9 +271,9 @@ const Sidebar = (props) => {
             <div>
                 <p className="attribution">
                     A Software Created By &nbsp;
-                    <a className="attribution-link" href="https://semsoftltd.com/" target={"_blank"}>
+                    <Link className="attribution-link" href="https://semsoftltd.com/" target={"_blank"}>
                         SEMSOFT LIMITED
-                    </a>
+                    </Link>
                 </p>
             </div>
         </>
