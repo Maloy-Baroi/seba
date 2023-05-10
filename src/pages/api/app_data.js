@@ -10,6 +10,10 @@ export async function getProductList() {
     return await callApi('api-product/products-list/');
 }
 
+export async function getProductList2(pageNumber) {
+    return await callApi(`api-product/products-list-2/?page=${pageNumber}`);
+}
+
 export async function getMedicineInfoList() {
     return await callApi('api-product/medicines-info/')
 }

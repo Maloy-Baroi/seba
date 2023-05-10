@@ -3,7 +3,7 @@ import {useState, useEffect} from "react";
 import {onHandleCartLength} from "@/pages/api/apis";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {getCategoryList, getProductList} from "@/pages/api/app_data";
+import {getCategoryList, getProductList, getProductList2} from "@/pages/api/app_data";
 import {userAgentFromString} from "next/server";
 
 
@@ -16,17 +16,36 @@ const ProductsTable = (props) => {
         setProducts(filteredProducts)
     }
 
-    const fetchProduct = async () => {
-        const all_pro = await getProductList();
-        setProducts(all_pro);
-    }
+    // const fetchProduct = async () => {
+    //     const all_pro = await getProductList();
+    //     setProducts((prevProducts) => [...prevProducts, ...all_pro]);
+    // }
+
+    const fetchProducts2 = async () => {
+        let all_prod2 = await getProductList2(1);
+        setProducts(all_prod2.results);
+        console.log(all_prod2);
+        let next_page_number = all_prod2.next.slice(-1);
+        const addedBarcodes = new Set(all_prod2.results.map((product) => product.barcode_id));
+        while (all_prod2.next !== null) {
+            next_page_number = all_prod2.next.slice(-1);
+            all_prod2 = await getProductList2(next_page_number);
+            const newProducts = all_prod2.results.filter(
+                (product) => !addedBarcodes.has(product.barcode_id)
+            );
+            setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+            newProducts.forEach((product) => addedBarcodes.add(product.barcode_id));
+        }
+    };
+
 
     useEffect(() => {
         if (props.searchValue) {
-            searchOption()
+            searchOption();
         } else {
-            fetchProduct().then(r => console.log(r))
-            setUserType(localStorage.getItem('group'))
+            // fetchProduct().then(r => console.log(r))
+            fetchProducts2().then(r => true);
+            setUserType(localStorage.getItem('group'));
         }
     }, [props.searchValue])
 
@@ -95,7 +114,7 @@ const ProductsTable = (props) => {
                             {
                                 products.length > 0 ? 
                                 products.map((item, index) => (
-                                    <tr key={item.id}>
+                                    <tr key={index}>
                                         <td data-label="Barcode">
                                             <p className={productsTableStyle.itemName}>{item.barcode_id} </p>
                                         </td>
