@@ -20,7 +20,7 @@ const MedicinesTable = (props) => {
         let all_prod2 = await getMedicineList2(1);
         setMedicines(all_prod2.results);
         console.log(all_prod2);
-        let next_page_number = all_prod2.next.slice(-1);
+        let next_page_number = 1;
         while (all_prod2.next !== null) {
             next_page_number = all_prod2.next.slice(-1);
             all_prod2 = await getMedicineList2(next_page_number);
