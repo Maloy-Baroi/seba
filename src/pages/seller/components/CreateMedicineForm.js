@@ -70,10 +70,10 @@ const CreateMedicineForm = () => {
         fetch("https://seba-backend.xyz/api-product/medicines-info/", requestOptions)
             .then(response => response.json())
             .then(result => {
-                setFilteredProductName(result);
                 fetchSubCategories().then(r => true);
                 fetchShelves().then(r => true);
-                fetchConsumptionType().then(r => true)
+                fetchConsumptionType().then(r => true);
+                setFilteredProductName(result);
             })
             .catch(error => console.log('error', error));
     }
@@ -81,6 +81,12 @@ const CreateMedicineForm = () => {
     const filteredSubCategories = subCategories.length > 0 ? subCategories.filter((category) => {
         return category.name.toLowerCase().startsWith(subCategorySearchText.toLowerCase());
     }) : [];
+
+    // useEffect(() => {
+    //     fetchSubCategories().then(r => true);
+    //     fetchShelves().then(r => true);
+    //     fetchConsumptionType().then(r => true);
+    // }, [])
 
 
     const handleProductNameInputChange = (event) => {
