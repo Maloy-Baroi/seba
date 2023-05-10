@@ -105,7 +105,7 @@ const MedicinesTable = (props) => {
                             {
                                 products.length > 0 ?
                                     products.map((item, index) => (
-                                        <tr key={item.id}>
+                                        <tr key={index}>
                                             <td data-label="Name">
                                                 <p className={productsTableStyle.itemName}>{item.name} </p>
                                                 <p>({item.unit})</p>
