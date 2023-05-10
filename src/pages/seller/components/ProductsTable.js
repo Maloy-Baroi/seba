@@ -16,11 +16,6 @@ const ProductsTable = (props) => {
         setProducts(filteredProducts)
     }
 
-    // const fetchProduct = async () => {
-    //     const all_pro = await getProductList();
-    //     setProducts((prevProducts) => [...prevProducts, ...all_pro]);
-    // }
-
     const fetchProducts2 = async () => {
         let all_prod2 = await getProductList2(1);
         setProducts(all_prod2.results);

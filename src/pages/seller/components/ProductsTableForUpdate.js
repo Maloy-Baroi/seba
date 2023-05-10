@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import productsTableStyle from "@/styles/productTable.module.css";
+import {getAllProductsMedicines, getProductList2} from "@/pages/api/app_data";
 
 const ProductsTableForUpdate = ({searchValue, onStartUpdate, changeKey}) => {
     const [products, setProducts] = useState([]);
@@ -10,25 +11,26 @@ const ProductsTableForUpdate = ({searchValue, onStartUpdate, changeKey}) => {
         setProducts(filteredProducts);
     }
 
+    const fetchProductsMedicines = async () => {
+        let all_prod2 = await getAllProductsMedicines(1);
+        setProducts(all_prod2.results);
+        console.log(all_prod2);
+        let next_page_number = 1;
+        while (all_prod2.next !== null) {
+            next_page_number = all_prod2.next.slice(-1);
+            all_prod2 = await getAllProductsMedicines(next_page_number);
+            const newProducts = all_prod2.results.filter(
+                (product) => !products.find((p) => parseInt(p.id) === parseInt(product.id))
+            );
+            setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+        }
+    }
+
     useEffect(() => {
         if (searchValue) {
             searchOption()
         } else {
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", `Bearer ${localStorage.getItem("access_token")}`);
-
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                redirect: 'follow'
-            };
-
-            fetch("https://seba-backend.xyz/api-product/all-products-list/", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    setProducts(result)
-                })
-                .catch(error => console.log('error', error));
+            fetchProductsMedicines().then(r => true)
         }
     }, [reloadTable])
 
@@ -58,7 +60,7 @@ const ProductsTableForUpdate = ({searchValue, onStartUpdate, changeKey}) => {
                             </thead>
                             <tbody>
                             {
-                                products.length>0 ?
+                                products && products.length>0 ?
                                 products.map((item, index) => (
                                     <tr key={item.id}>
                                         <td data-label="Name">
@@ -87,7 +89,8 @@ const ProductsTableForUpdate = ({searchValue, onStartUpdate, changeKey}) => {
                                         <td data-label="Action">
                                             <div>
                                                 <button className={productsTableStyle.AddToSellBtn}
-                                                        onClick={() => onStartUpdate(item.id, item.name, item.quantity, item.minimum_alert_quantity, item.minimum_selling_price, item.bought_price, item.status)}>Update
+                                                        onClick={() => onStartUpdate(item.id, item.name, item.quantity, item.minimum_alert_quantity, item.minimum_selling_price, item.bought_price, item.status)}>
+                                                    Update
                                                 </button>
                                             </div>
                                         </td>

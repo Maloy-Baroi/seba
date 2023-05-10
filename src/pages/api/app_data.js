@@ -18,6 +18,10 @@ export async function getProductList2(pageNumber) {
     return await callApi(`api-product/products-list-2/?page=${pageNumber}`);
 }
 
+export async function getAllProductsMedicines(pageNumber) {
+    return await callApi(`api-product/all-products-list/?page=${pageNumber}`);
+}
+
 export async function getMedicineInfoList() {
     return await callApi('api-product/medicines-info/')
 }
